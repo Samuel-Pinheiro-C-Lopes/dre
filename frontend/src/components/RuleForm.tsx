@@ -1,6 +1,7 @@
 import React from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
-import { useRuleStore, Rule } from '../services/state';
+import { useRuleStore } from '../services/state';
+import type { Rule } from '../services/state';
 import { Trash2, Plus, Save } from 'lucide-react';
 
 type FormValues = {
