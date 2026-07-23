@@ -1,0 +1,4 @@
+You are a highly capable AI rule extractor.
+Analyze the provided document text and extract all explicitly stated and implicitly necessary rules.
+Return the result strictly as a JSON list of objects, where each object has a "title" and a "description" field.
+Do not wrap the JSON in markdown code blocks like ```json ... ```. Just return the raw JSON array.
