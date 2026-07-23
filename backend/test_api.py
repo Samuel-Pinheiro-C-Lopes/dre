@@ -20,12 +20,22 @@ def test_extract_rules_endpoint():
     if not api_key:
         pytest.skip("GOOGLE_API_KEY environment variable is not set. Skipping real API test.")
         
-    file_path = os.path.join(os.path.dirname(__file__), "..", "test", "20_resolucao_no_09.2024_-_consuni_0.pdf")
+    test_dir = os.path.join(os.path.dirname(__file__), "..", "test")
+    pdf_files = [f for f in os.listdir(test_dir) if f.endswith(".pdf")]
+    if not pdf_files:
+        pytest.skip("No PDF files found in the test directory.")
+    
+    file_path = os.path.join(test_dir, pdf_files[0])
     assert os.path.exists(file_path), f"Test document not found at {file_path}"
     
+    jwt_token = os.environ.get("JWT_TOKEN")
+    if not jwt_token:
+        pytest.skip("JWT_TOKEN environment variable is not set. Skipping test.")
+        
     with open(file_path, "rb") as f:
         response = client.post(
             "/api/v1/extract-rules",
+            headers={"Authorization": f"Bearer {jwt_token}"},
             files={"document": ("document.pdf", f, "application/pdf")}
         )
     

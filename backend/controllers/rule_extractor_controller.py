@@ -8,17 +8,9 @@ from backend.services.document_service import DocumentService
 from backend.services.llm_service import LLMService
 from backend.engines.document_engine import get_document_engine_chain
 from backend.engines.llm_engine import GeminiLLMEngine
-from fastapi.security import OAuth2PasswordBearer
+from backend.services.security import verify_token
 
 router = APIRouter()
-
-# Basic security placeholder
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
-def verify_token(token: str = Depends(oauth2_scheme)):
-    # Placeholder for actual verification
-    if token != "supersecrettoken":
-        raise HTTPException(status_code=401, detail="Invalid token")
-    return token
 
 def get_extraction_service() -> ExtractionService:
     doc_engine = get_document_engine_chain()
@@ -35,7 +27,7 @@ def get_extraction_service() -> ExtractionService:
 @router.post("/extract-rules", response_model=RulesResponseDTO)
 async def extract_rules(
     document: UploadFile = File(...),
-    # token: str = Depends(verify_token), # Disabled for easier testing locally
+    token_payload: dict = Depends(verify_token),
     service: ExtractionService = Depends(get_extraction_service)
 ):
     temp_dir = "/tmp/rule_extractor"

@@ -1,26 +1,34 @@
 [
   {
-    "title": "Documentação Exigida para Afastamento",
-    "description": "O servidor deve apresentar solicitação apropriada, projeto de estudos, comprovação de vínculo ao programa, matrícula em ação de desenvolvimento, concessão de bolsa (se aplicável), termo de compromisso e responsabilidade, manifestação da Unidade Universitária/Órgão e cópia da aprovação no processo seletivo interno."
+    "title": "Preencher o formulário de requerimento",
+    "description": "Preencher o formulário de requerimento obrigatório."
   },
   {
-    "title": "Regras Gerais de Afastamento",
-    "description": "O afastamento exige aprovação em seleção interna e limite máximo de 5% dos servidores da unidade afastados ao mesmo tempo."
+    "title": "Certidão de nascimento ou casamento",
+    "description": "Anexar documentação (no todo ou em parte, sempre que solicitado pelo campus): certidão de nascimento ou casamento."
   },
   {
-    "title": "Tempo Mínimo de Cargo Exigido",
-    "description": "Exige-se 3 anos de cargo para Mestrado e 4 anos para Doutorado e Pós-Doutorado."
+    "title": "RG e CPF",
+    "description": "Anexar documentação (no todo ou em parte, sempre que solicitado pelo campus): RG e CPF."
   },
   {
-    "title": "Tempo Máximo Permitido Fora",
-    "description": "Permitido até 24 meses para Mestrado, até 48 meses para Doutorado e até 12 meses para Pós-Doutorado."
+    "title": "Quitação com a justiça eleitoral",
+    "description": "Anexar documentação (no todo ou em parte, sempre que solicitado pelo campus): comprovante de quitação com a justiça eleitoral."
   },
   {
-    "title": "Licença Capacitação",
-    "description": "A cada 5 anos de trabalho, pode-se pedir até 3 meses para cursos com carga horária de pelo menos 30h semanais."
+    "title": "Quitação com alistamento militar",
+    "description": "Anexar documentação (no todo ou em parte, sempre que solicitado pelo campus): comprovante de quitação com alistamento militar."
   },
   {
-    "title": "Deveres Principais (Pós-Afastamento)",
-    "description": "Após o retorno, é obrigatório trabalhar na UFBA pelo mesmo tempo em que esteve afastado e entregar o diploma/relatórios. Se desistir, reprovar ou pedir demissão/aposentadoria antes, deverá devolver os valores recebidos."
+    "title": "Histórico do curso concluído",
+    "description": "Anexar documentação (no todo ou em parte, sempre que solicitado pelo campus): histórico do curso concluído."
+  },
+  {
+    "title": "Histórico de conclusão do ensino fundamental",
+    "description": "Anexar documentação (no todo ou em parte, sempre que solicitado pelo campus): histórico de conclusão do ensino fundamental."
+  },
+  {
+    "title": "Histórico de conclusão do ensino médio",
+    "description": "Anexar documentação (no todo ou em parte, sempre que solicitado pelo campus): histórico de conclusão do ensino médio (para o subsequente)."
   }
 ]
