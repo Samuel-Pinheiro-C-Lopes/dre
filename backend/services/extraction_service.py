@@ -29,6 +29,7 @@ class ExtractionService:
             raise ValueError("Could not extract text from document or document is empty.")
             
         prompt = self._get_prompt()
+        prompt += "\n\nCRITICAL INSTRUCTION: Regardless of the prompt above, you MUST output ONLY valid JSON. The output MUST be a JSON array of objects, where each object has exactly two string fields: 'title' and 'description'. Do not include any conversational text or markdown other than the JSON block."
         llm_response = self.llm_service.extract_rules(prompt, document_text)
         
         try:

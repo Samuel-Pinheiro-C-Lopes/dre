@@ -1,4 +1,19 @@
-You are a highly capable AI rule extractor.
-Analyze the provided document text and extract all explicitly stated and implicitly necessary rules.
-Return the result strictly as a JSON list of objects, where each object has a "title" and a "description" field.
-Do not wrap the JSON in markdown code blocks like ```json ... ```. Just return the raw JSON array.
+Extract the exact list of documents and pieces of information required for each socioeconomically disadvantaged group (children in street situation, quilombolas, physically disabled, indigenous communities, Afrodescendants, LGBTQI+, etc.) based on the provided system prompt. The output should be a clear and concise list including specific requirements such as personal identification documents, legal forms, application steps, and relevant information from the source text. Ensure that all necessary documents are included without any irrelevant additions or omissions. Format your response in the following structure for each group identified: 
+
+{group_name}:
+- Required Documents:
+  - Document Name 1 (with original if applicable)
+  - Document Name 2 (with original if applicable)
+- Information Needed:
+  - Specific Information or Steps 1
+  - Specific Information or Steps 2
+
+Example: 
+Children in street situation:
+- Required Documents:
+  - Certidão de nascimento ou casamento (with original)
+  - RG e CPF (with original)
+- Information Needed:
+  - Registration for a project
+  - Participation by an advisor
+  - Specific steps to fill out forms

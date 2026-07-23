@@ -1,10 +1,12 @@
 from fastapi.testclient import TestClient
 import os
+import json
 from dotenv import load_dotenv
 
 load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), '..', '.env'))
 
 from backend.main import app
+from backend.services.evaluation_service import EvaluationService
 import pytest
 
 client = TestClient(app)
@@ -22,24 +24,51 @@ def test_extract_rules_endpoint():
     assert os.path.exists(file_path), f"Test document not found at {file_path}"
     
     with open(file_path, "rb") as f:
-        # We send the request just as the frontend would via FormData
         response = client.post(
             "/api/v1/extract-rules",
             files={"document": ("document.pdf", f, "application/pdf")}
         )
     
-    # Assert successful response
     if response.status_code != 200:
         print(f"Error from server: {response.text}")
     assert response.status_code == 200
     
-    # Assert structure of the response
     data = response.json()
     assert "rules" in data
     assert isinstance(data["rules"], list)
     
-    print(f"Extracted {len(data['rules'])} rules successfully.")
-    for rule in data["rules"]:
+    extracted_rules = data["rules"]
+    print(f"Extracted {len(extracted_rules)} rules successfully.")
+    for rule in extracted_rules:
         assert "title" in rule
         assert "description" in rule
         assert "id" in rule
+
+    # 1. Save extracted rules to /output/rules.json
+    output_dir = os.path.join(os.path.dirname(__file__), "output")
+    os.makedirs(output_dir, exist_ok=True)
+    rules_output_path = os.path.join(output_dir, "rules.json")
+    
+    with open(rules_output_path, "w", encoding="utf-8") as f:
+        json.dump(extracted_rules, f, ensure_ascii=False, indent=4)
+        
+    # 2. Evaluate using Levenshtein distance
+    eval_service = EvaluationService()
+    resources_dir = os.path.join(os.path.dirname(__file__), "resources")
+    os.makedirs(resources_dir, exist_ok=True)
+    correct_rules_path = os.path.join(resources_dir, "rules.json")
+    
+    # Create empty rules.json if it doesn't exist
+    if not os.path.exists(correct_rules_path):
+        with open(correct_rules_path, "w", encoding="utf-8") as f:
+            json.dump([], f)
+
+    results_output_path = os.path.join(output_dir, "results.json")
+    
+    eval_result = eval_service.evaluate_and_save(
+        extracted_rules=extracted_rules,
+        correct_rules_path=correct_rules_path,
+        output_path=results_output_path
+    )
+    
+    print(f"Evaluation Complete! Semantic Similarity: {eval_result['percentual_similaridade_semantica']}%")
